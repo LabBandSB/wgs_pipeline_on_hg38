@@ -138,15 +138,15 @@ def parse_arguments_to_settings():
 
 def load_fastq_samples(settings):
     def get_files_generator(dirs_list, extension):
-    for _dir in sorted(dirs_list):
-        for _file in sorted(os.listdir(_dir)):
-            if not _file:
-                continue
-            _file_path = os.path.join(_dir, _file)
-            if os.path.isfile(_file_path) and _file_path.endswith(extension):
-                yield _file_path                
-            elif os.path.isdir(_file_path):
-                yield from get_files_generator([_file_path], extension)
+        for _dir in sorted(dirs_list):
+            for _file in sorted(os.listdir(_dir)):
+                if not _file:
+                    continue
+                _file_path = os.path.join(_dir, _file)
+                if os.path.isfile(_file_path) and _file_path.endswith(extension):
+                    yield _file_path                
+                elif os.path.isdir(_file_path):
+                    yield from get_files_generator([_file_path], extension)
 
     if settings["debug"]:
         print("# load_fastq_samples: load_settings\n#", settings)
